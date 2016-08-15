@@ -1,0 +1,24 @@
+service: cloudvision
+
+provider:
+  name: aws
+  runtime: python2.7
+
+defaults:
+ stage: dev
+ region: us-east-1
+
+package:
+  include:
+    - cloudvision
+  exclude:
+   - .git
+
+functions:
+  cloudvision:
+    name: lambda-cloudvision
+    handler: cloudvision/handler.lambda_handler
+    events:
+      - http:
+        path: detect_image
+        method: get
