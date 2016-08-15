@@ -20,5 +20,5 @@ functions:
     handler: cloudvision/handler.lambda_handler
     events:
       - http:
-        path: detect_image
-        method: get
+          path: detect_image
+          method: get
