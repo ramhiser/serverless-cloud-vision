@@ -4,13 +4,71 @@ This project is a serverless API wrapper around
 [Google Cloud Vision](https://cloud.google.com/vision/) using
 [AWS API Gateway](https://aws.amazon.com/api-gateway/) +
 [AWS Lambda](https://aws.amazon.com/lambda/). Deployment is performed with the
-[Serverless Framework](http://serverless.com/). The project's API ingests an
-image URL and sends the image to Google Cloud Vision for standard image
-recognition tasks (e.g., facial detection, OCR, etc.).
+[Serverless Framework](http://serverless.com/).
 
-## Example Usage
+## Usage
 
-TODO
+The API Gateway endpoint accepts an image URL and triggers a Lambda function,
+which ingests the image from a URL and sends the image to Google Cloud Vision
+for standard image recognition tasks (e.g., facial detection, OCR, etc.).
+
+For instance, the following `curl` command sends an image URL to the API Gateway.
+
+```
+curl -H "Content-Type: application/json" -X POST \
+-d '{"image_url": "https://raw.githubusercontent.com/ramhiser/serverless-cloud-vision/master/examples/images/ramhiser-and-son.jpg"}' \
+https://some-api-gateway.execute-api.us-east-1.amazonaws.com/dev/detect_image
+```
+
+The response JSON includes a variety of metadata to describe the faces detected:
+
+```
+{
+  "responses": [
+    {
+      "faceAnnotations": [
+        {
+          "angerLikelihood": "VERY_UNLIKELY",
+          "blurredLikelihood": "VERY_UNLIKELY",
+          "boundingPoly": {
+            "vertices": [
+              {
+                "x": 512,
+                "y": 249
+              },
+              {
+                "x": 637,
+                "y": 249
+              },
+              {
+                "x": 637,
+                "y": 395
+              },
+              {
+                "x": 512,
+                "y": 395
+              }
+            ]
+          },
+          "detectionConfidence": 0.98645973,
+          ...
+```
+
+In the `examples` folder, we provide a script that produces a new image with
+bounding boxes around the faces detected:
+
+![highlighted faces](https://raw.githubusercontent.com/ramhiser/serverless-cloud-vision/master/examples/images/highlighted-faces.jpg)
+
+Beyond facial detection, Google Cloud Vision [supports the following image
+recognition tasks](https://cloud.google.com/vision/docs/requests-and-responses):
+
+* `LABEL_DETECTION`
+* `TEXT_DETECTION`
+* `SAFE_SEARCH_DETECTION`
+* `FACE_DETECTION`
+* `LANDMARK_DETECTION`
+* `LOGO_DETECTION`
+* `IMAGE_PROPERTIES`
 
 ## Google Cloud Vision Credentials
 
