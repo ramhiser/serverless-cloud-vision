@@ -1,4 +1,3 @@
-import argparse
 import logging
 import os
 import sys
@@ -12,8 +11,7 @@ from lib import detect_image
 def lambda_handler(event, context):
     """AWS Lambda Handler for API Gateway input"""
     post_args = event.get("body", {})
-    image_url = post_args.get("image_url",
-                              "https://raw.githubusercontent.com/ramhiser/serverless-cloud-vision/master/examples/images/ramhiser-and-son.jpg")
+    image_url = post_args["image_url"]
     detect_type = post_args.get("detect_type", "FACE_DETECTION")
     max_results = post_args.get("max_results", 4)
 
@@ -26,33 +24,4 @@ def lambda_handler(event, context):
                                max_results)
     return json_return
 
-
-if __name__ == '__main__':
-        parser = argparse.ArgumentParser(
-            description='Detects faces in the given image.'
-        )
-        parser.add_argument(
-            '-i', '--image_url',
-            help='The image URL to send to Google Cloud Vision API ',
-            required=True
-        )
-        parser.add_argument(
-            '-d', '--detect_type',
-            help='detection type to perform. Default: %(default)s',
-            default="FACE_DETECTION"
-        )
-        parser.add_argument(
-            '-m', '--max_results',
-            help='the max number of entities to detect. Default: %(default)s',
-            default=4,
-            type=int
-        )
-        
-        args = parser.parse_args()
-
-        detection_results = detect_image(args.image_url,
-                                         args.detect_type,
-                                         args.max_results)
-
-        print detection_results
 
