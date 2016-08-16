@@ -12,6 +12,15 @@ recognition tasks (e.g., facial detection, OCR, etc.).
 
 TODO
 
+## Google Cloud Vision Credentials
+
+In order to access the Cloud Vision API, you will need to create Google
+Application Credentials by following the instructions
+[here](https://cloud.google.com/vision/docs/auth-template/cloud-api-auth) for
+the **Service Account Key**. Then, download the JSON file with your application
+credentials and rename the file as
+`cloudvision/google-application-credentials.json`.
+
 ## Deployment
 
 Make sure you have Node.js 4.0+ installed. Then, install the [Serverless Framework](https://github.com/serverless/serverless).
@@ -29,15 +38,8 @@ pip install -t cloudvision/vendored/ -r requirements.txt
 **NOTE**: Homebrew + Mac OS users who encounter the `DistutilsOptionError` error
 should see [this SO post](http://stackoverflow.com/a/24357384/234233) for a fix.
 
-In order to access the Cloud Vision API, you will need to create Google
-Application Credentials by following the instructions
-[here](https://cloud.google.com/vision/docs/auth-template/cloud-api-auth) for
-the **Service Account Key**. Then, download the JSON file with your application
-credentials and rename the file as
-`cloudvision/google-application-credentials.json`.
-
-After installing Python requirements to the `vendored` folder, we are ready to
-deploy our API. At the commandline, type:
+After installing Python requirements to the `vendored` folder, type the
+following at the commandline to deploy the wrapper API:
 
 ```
 serverless deploy
