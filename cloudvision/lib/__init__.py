@@ -62,7 +62,7 @@ def detect_image(image_url, detect_type="FACE_DETECTION", max_results=4):
     service = get_vision_service()
     request = service.images().annotate(
         body={
-            'requests': batch_request,
+            'requests': batch_request
         }
     )
     response = request.execute()

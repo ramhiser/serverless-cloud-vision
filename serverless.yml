@@ -21,4 +21,4 @@ functions:
     events:
       - http:
           path: detect_image
-          method: get
+          method: post

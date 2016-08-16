@@ -5,19 +5,17 @@ import sys
 
 here = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(here)
-sys.path.append(os.path.join(here, "vendored"))
-
-from googleapiclient import discovery
-from oauth2client.client import GoogleCredentials
 
 from lib import detect_image
 
 
 def lambda_handler(event, context):
     """AWS Lambda Handler for API Gateway input"""
-    image_url = event.get("image_url", "https://raw.githubusercontent.com/ramhiser/serverless-cloud-vision/master/images/ramhiser-and-son.jpg")
-    detect_type = event.get("detect_type", "FACE_DETECTION")
-    max_results = event.get("max_results", 4)
+    post_args = event.get("body", {})
+    image_url = post_args.get("image_url",
+                              "https://raw.githubusercontent.com/ramhiser/serverless-cloud-vision/master/examples/images/ramhiser-and-son.jpg")
+    detect_type = post_args.get("detect_type", "FACE_DETECTION")
+    max_results = post_args.get("max_results", 4)
 
     logging.debug("Detecting image from URL: %s" % image_url)
     logging.debug("Image detection type: %s" % detect_type)
