@@ -30,19 +30,17 @@ pip install -t cloudvision/vendored/ -r requirements.txt
 should see [this SO post](http://stackoverflow.com/a/24357384/234233) for a fix.
 
 In order to access the Cloud Vision API, you will need to create Google
-Application Credentials. You will need to create a **Service Account Key** by
-following the instructions given
-[here](https://cloud.google.com/vision/docs/auth-template/cloud-api-auth).
-
-After creating a **Service Account Key**, download the JSON file with your
- application credentials and renamed the file as
- `cloudvision/google-application-credentials.json`.
+Application Credentials by following the instructions
+[here](https://cloud.google.com/vision/docs/auth-template/cloud-api-auth) for
+the **Service Account Key**. Then, download the JSON file with your application
+credentials and rename the file as
+`cloudvision/google-application-credentials.json`.
 
 After installing Python requirements to the `vendored` folder, we are ready to
 deploy our API. At the commandline, type:
 
 ```
-sls deploy
+serverless deploy
 ```
 
 This command does the following:
