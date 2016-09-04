@@ -1,3 +1,4 @@
+from contextlib import closing
 import argparse
 import json
 import urllib2
@@ -18,14 +19,16 @@ def highlight_faces(image_url, faces, output_filename):
       output_filename: the name of the image file to be created, where the
           faces have polygons drawn around them.
     """
-    img = urllib2.urlopen(image_url)
-    if img.headers.maintype != "image":
-        raise TypeError("Invalid filetype given")
+    # Context manager for urllib2.urlopen requires `contextlib` library
+    # Source: http://stackoverflow.com/a/14849166/234233
+    with closing(urllib2.urlopen(image_url)) as img:
+        if img.headers.maintype != "image":
+            raise TypeError("Invalid filetype given")
 
-    # Source: http://stackoverflow.com/a/7391991/234233
-    img_file = cStringIO.StringIO(img.read())
+        # Source: http://stackoverflow.com/a/7391991/234233
+        img_file = cStringIO.StringIO(img.read())
+
     im = Image.open(img_file)
-    img.close()
     draw = ImageDraw.Draw(im)
 
     for face in faces["responses"][0]["faceAnnotations"]:

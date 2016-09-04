@@ -1,3 +1,4 @@
+from contextlib import closing
 import urllib2
 import base64
 import os
@@ -43,21 +44,21 @@ def detect_image(image_url, detect_type="FACE_DETECTION", max_results=4):
     if type(max_results) is not int or max_results <= 0:
         raise TypeError('Maximum results must be a positive integer')
 
-    img = urllib2.urlopen(image_url)
-    if img.headers.maintype != 'image':
-        raise TypeError('Invalid filetype given')
+    # Context manager for urllib2.urlopen requires `contextlib` library
+    # Source: http://stackoverflow.com/a/14849166/234233
+    with closing(urllib2.urlopen(image_url)) as img:
+        if img.headers.maintype != 'image':
+            raise TypeError('Invalid filetype given')
 
-    batch_request = [{
-        'image': {
-            'content': base64.b64encode(img.read()).decode('UTF-8')
-        },
-        'features': [{
-            'type': detect_type,
-            'maxResults': max_results
+        batch_request = [{
+            'image': {
+                'content': base64.b64encode(img.read()).decode('UTF-8')
+            },
+            'features': [{
+                'type': detect_type,
+                'maxResults': max_results
+            }]
         }]
-    }]
-
-    img.close()
 
     service = get_vision_service()
     request = service.images().annotate(
