@@ -109,3 +109,15 @@ This command does the following:
 * Zips Python code and uploads to S3
 * Creates AWS Lambda function
 * Creates API Gateway endpoint that triggers AWS Lambda function
+
+## Examples
+
+Example Python scripts are available in the `examples` folder. These examples
+require that the API (described above) be successfully deployed. As [mentioned by
+Chris Cooper](https://github.com/ramhiser/serverless-cloud-vision/issues/3), the
+Python dependencies must be installed locally in order to run the examples. To
+do this, type the following locally:
+
+```
+pip install -r requirements.txt
+```
