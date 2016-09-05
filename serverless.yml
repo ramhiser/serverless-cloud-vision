@@ -12,7 +12,7 @@ package:
   include:
     - cloudvision
   exclude:
-   - .git
+    - .git
 
 functions:
   cloudvision:
