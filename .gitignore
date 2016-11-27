@@ -1,6 +1,9 @@
 # Location of Python libraries
 vendored/
 
+# Credentials
+cloudvision/google-application-credentials.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
