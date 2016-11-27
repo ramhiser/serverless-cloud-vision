@@ -74,7 +74,7 @@ recognition tasks](https://cloud.google.com/vision/docs/requests-and-responses):
 
 In order to access the Cloud Vision API, you will need to create Google
 Application Credentials by following the instructions
-[here](https://cloud.google.com/vision/docs/auth-template/cloud-api-auth) for
+[here](https://cloud.google.com/vision/docs/common/auth#set_up_a_service_account) for
 the **Service Account Key**. Then, download the JSON file with your application
 credentials and rename the file as
 `cloudvision/google-application-credentials.json`.
