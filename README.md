@@ -6,6 +6,8 @@ This project is a serverless API wrapper around
 [AWS Lambda](https://aws.amazon.com/lambda/). Deployment is performed with the
 [Serverless Framework](http://serverless.com/).
 
+Details are described in [this blog post](https://ramhiser.com/2016/09/05/serverless-api-around-google-cloud-vision-with-the-serverless-framework/).
+
 ## Usage
 
 The API Gateway endpoint accepts an image URL and triggers a Lambda function,
